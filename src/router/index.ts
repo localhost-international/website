@@ -10,7 +10,7 @@ Vue.use(VueRouter)
     name: 'Home',
     component: () => import('../views/Home.vue'),
     meta: {
-      title: 'localhost'
+      title: 'localhost %'
     }
   },
   {
@@ -18,7 +18,7 @@ Vue.use(VueRouter)
     name: 'Experiments',
     component: () => import('../views/Experiments.vue'),
     meta: {
-      title: 'localhost - experiments'
+      title: 'localhost % - experiments'
     }
   },
   {
@@ -26,7 +26,7 @@ Vue.use(VueRouter)
     name: 'Projects',
     component: () => import('../views/Projects.vue'),
     meta: {
-      title: 'localhost - projects'
+      title: 'localhost % - projects'
     }
   },
   {
@@ -34,7 +34,7 @@ Vue.use(VueRouter)
     name: 'Work',
     component: () => import('../views/Work.vue'),
     meta: {
-      title: 'localhost - work'
+      title: 'localhost % - work'
     }
   },
   {
@@ -42,7 +42,7 @@ Vue.use(VueRouter)
     name: 'Contact',
     component: () => import('../views/Contact.vue'),
     meta: {
-      title: 'localhost - contact'
+      title: 'localhost % - contact'
     }
   },
 ];
@@ -69,16 +69,16 @@ router.beforeEach((to, from, next) => {
 
   if (!nearestWithMeta) return next();
 
-  nearestWithMeta.meta.metaTags.map((tagDef: any) => {
-    const tag: HTMLMetaElement = document.createElement('meta');
-    Object.keys(tagDef).forEach((key: any) => {
-      tag.setAttribute(key, tagDef[key]);
-    });
-    tag.setAttribute('data-vue-router-controlled', '');
-    return tag;
-  })
-  // Add the meta tags to the document head.
-  .forEach((tag: HTMLMetaElement) => document.head.appendChild(tag));
+  nearestWithMeta.meta.metaTags
+    .map((tagDef: any) => {
+      const tag: HTMLMetaElement = document.createElement('meta');
+      Object.keys(tagDef).forEach((key: any) => {
+        tag.setAttribute(key, tagDef[key]);
+      });
+      tag.setAttribute('data-vue-router-controlled', '');
+      return tag;
+    })
+    .forEach((tag: HTMLMetaElement) => document.head.appendChild(tag));
 
   next();
 });
