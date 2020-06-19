@@ -1,4 +1,4 @@
 window.onload = () => {
   console.log('...');
-  window.location = 'http://leslieoa.com/'
+  // window.location = 'http://leslieoa.com/'
 };
