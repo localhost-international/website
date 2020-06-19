@@ -1,5 +1,6 @@
 window.onload = () => {
   console.log('Uno reverse');
   alert('Uno reverse');
-  document.querySelector('.text-flip').style.outline = '1px solid red';
+  document.querySelector('html').style.opacity = '.5 !important';
+  document.querySelector('body').style.opacity = '.5 !important';
 };
