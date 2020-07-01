@@ -27,3 +27,12 @@ yarn deploy
 - Don't use JS bundlers
 - Pretty print CSS
 - Copy/package processed website into `/dist` folder for `gh-pages`
+- A11y!!!
+
+
+
+
+### Things
+
+- [GitHub Pages 404](https://docs.github.com/en/github/working-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site)
+- [TSDoc](https://github.com/microsoft/tsdoc)
