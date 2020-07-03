@@ -3,7 +3,7 @@ title: Experiments
 slug: experiments
 tags: experiments
 template: default
-desctioption: localhost % experiments
+description: localhost % experiments
 ---
 
 Soon...

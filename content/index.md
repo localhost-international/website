@@ -3,7 +3,7 @@ title: Home
 slug: index
 tags: homepage
 template: index
-desctioption: localhost % homepage
+description: localhost % homepage
 ---
 
 

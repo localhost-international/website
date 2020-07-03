@@ -3,7 +3,7 @@ title: Projects
 slug: projects
 tags: projects
 template: default
-desctioption: localhost % projects
+description: localhost % projects
 ---
 
 [Cartographer](/projects/cartographer)

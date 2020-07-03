@@ -1,7 +1,7 @@
 import liveServer from 'live-server'
 
 import * as config from './config.json'
-import compile from './compile'
+import compile from './src/compile'
 
 
 // Compile list of files
