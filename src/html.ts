@@ -4,7 +4,7 @@ const html = (strings:any, ...values:any) => {
     const value = typeof values[idx] === 'string' ? `${values[idx]}` : ''
     template += `${string}${value}`
   }).join('')
-  console.log('\nRendered\n\n', `${template}`)
+  // console.log('\nRendered\n\n', `${template}`)
   return template;
 };
 
