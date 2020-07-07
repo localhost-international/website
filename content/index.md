@@ -1,7 +1,7 @@
 ---
 title: Home
 slug: index
-tags: homepage
+tags: homepage index
 template: index
 description: localhost % homepage
 ---
