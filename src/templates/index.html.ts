@@ -15,6 +15,7 @@ export const template = (meta:any, markup:string) => {
 			</head>
 			<body data-template="${meta.template}">
 				<main>${markup}</main>
+				<script type="module" src="/assets/vnd/history.production.min.js"></script>
 				<script src="/assets/js/index.js"></script>
 			</body>
 		</html>

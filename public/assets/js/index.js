@@ -1,6 +1,9 @@
+import { createBrowserHistory } from './vnd/history.production.min.js'
+let history = createBrowserHistory()
+
 window.onload = () => {
 
-  console.log('Hello humans');
+  console.log('Hello humans', history)
 
 
   const body = document.body
@@ -74,9 +77,7 @@ window.onload = () => {
   window.onpopstate = (evt) => {
     const state = evt.state
     console.log('popstate::state', state)
-    
     if (state !== null) loadPartial(`${state}`, 'main', 'main')
-
   }
 
 

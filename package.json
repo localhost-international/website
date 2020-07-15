@@ -10,7 +10,9 @@
     "test": "echo \"There currently aren't any tests.\"",
     "lint": "echo \"Currently not linting code\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1"
+  },
   "devDependencies": {
     "@types/dompurify": "^2.0.2",
     "@types/fs-extra": "^9.0.1",
@@ -29,10 +31,12 @@
     "js-beautify": "^1.11.0",
     "jsdom": "^16.2.2",
     "live-server": "^1.2.1",
+    "local-web-server": "^4.2.1",
     "marked": "^1.1.0",
     "nodemon": "^2.0.4",
     "rimraf": "^3.0.2",
     "sanitize-html": "^1.27.0",
+    "superstatic": "^6.0.4",
     "ts-jest": "^26.1.1",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
