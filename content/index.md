@@ -7,6 +7,12 @@ description: localhost % homepage
 ---
 
 
+<ul>
+  <li><a href="/">L'Homme</a></li>
+  <li><a href="/experiments">Exp</a></li>
+  <li><a href="/work">Work</a></li>
+</ul>
+
 <h1>
   localhost&nbsp;
   <span aria-hidden="true">🌐</span>

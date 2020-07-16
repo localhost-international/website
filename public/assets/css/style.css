@@ -11,7 +11,7 @@
 }
 
 body,
-body.fade-on-enter {
+body.fade-in {
   opacity: 0;
   animation-name: fade-in;
   animation-duration: 250ms;
@@ -19,7 +19,7 @@ body.fade-on-enter {
   animation-timing-function: ease-in-out;
 }
 
-body.fade-on-exit {
+body.fade-out {
   opacity: 1;
   animation-name: fade-out;
   animation-duration: 250ms;

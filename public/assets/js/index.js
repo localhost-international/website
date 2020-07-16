@@ -1,89 +1,98 @@
-import { createBrowserHistory } from './vnd/history.production.min.js'
-let history = createBrowserHistory()
-
 window.onload = () => {
 
-  console.log('Hello humans', history)
+  console.log('window.load')
+
+	const body = document.body
+
+	const domainURI = `${window.top.location.host.toString()}`
+
+	const internalLinksStr = `a[href^="${domainURI}"], a[href^="/"]`
 
 
-  const body = document.body
+  function pageTransition(cb) {
+    body.classList.add('fade-out')
 
-  /**
-   * Hyperlinks
-   * 
-   * TODO
-   * - Make exceptions for a[href^="#"]
-   */
-  const domainURI = `${window.top.location.host.toString()}`
-  const internalLinksStr = `a[href^="${domainURI}"], a[href^="/"]`
-  const internalLinks = document.querySelectorAll(internalLinksStr)
+    const handleFadeAnimation = evt => {
+      console.log('handleFadeAnimation::animatedend', evt)
+      if (evt.animationName === 'fade-out') {
+        console.log('animation event removed')
+        fadeAnimation.removeEventListener('animationend', handleFadeAnimation, true)
+        body.classList.remove('fade-out')
+        body.classList.add('fade-in')
+        if (cb) cb()
+      }
+    }
 
-  internalLinks.forEach((link) => {
-    link.addEventListener('click', (evt) => {
-      evt.preventDefault()
-      body.classList.add('fade-on-exit')
-      
-      const fadeExitAnimation = document.querySelector('.fade-on-exit')
-      fadeExitAnimation.addEventListener('animationend', (evt) => {
-        if (evt.animationName == 'fade-out') {
-          console.log('evt.propertyName', evt.animationName)
-          loadPartial(`${link.href}.html`, 'main', 'main')
-        }
-      })
-      
-    })
-  })
+    const fadeAnimation = document.querySelector('body.fade-out')
+    fadeAnimation.addEventListener('animationend', handleFadeAnimation, true)
+  }
 
 
-  let firstVisit = false
+	function prepareLinks(links) {
+		const internalLinks = links
+		internalLinks.forEach((link) => {
+			console.log('Links', link.href)
 
-  function loadPartial (url, source, target) {
+			link.addEventListener('click', (evt) => {
+        evt.preventDefault()
+        
+        pageTransition(() => {
+          const regex = `(${window.location.origin}|.html)`
+          const path = `${(link.href).replace( new RegExp(regex, 'g'), '')}`
+          console.log('internalLinks::page', `"${path}"`)
+          load(path)
+        })
 
-    const targetContainer = document.querySelector(target)
-    const partialTemp = document.createElement('div')
+			})
+		})
+	}
 
-    fetch(url)
-      .then((resp) => {
+	// Parse links on page
+	const internalLinks = document.querySelectorAll(internalLinksStr)
+	prepareLinks(internalLinks)
 
-        resp.text().then((text) => {
 
-          let href = `${url.replace(/`${domain}`/g, '')}`
-          history.pushState(window.location.href, null, href)
 
-          partialTemp.innerHTML = text
-          const partial = partialTemp.querySelector(source)
-          body.replaceChild(partial, targetContainer)
-          console.log(
-            'Partial - url, href, partial',
-            url, href, partial
-          )
+	function load(path) {
+		const cleanUrl = path // e.g. /, /experiments or /projects/geography
+
+		const source = 'main', target = 'main'
+
+		const targetContainer = document.querySelector(target)
+		const partialTemp = document.createElement('div')
+		
+		console.log('load::dom', targetContainer, partialTemp)
+
+		const urlToLoad = `${window.location.origin}${path}`
+
+		fetch(urlToLoad)
+			.then((resp) => {
+				resp.text().then((text) => {
+
+					partialTemp.innerHTML = text
+					const partial = partialTemp.querySelector(source)
+					
+					console.log('load::fetch::', partial)
+
+          targetContainer.replaceWith(partial)
+
+					// Parse new links on page
+          prepareLinks(body.querySelectorAll(internalLinksStr))
 
           body.classList.remove('fade-on-exit')
           body.classList.add('fade-on-enter')
 
-          
-        })
-
-      })
-      .catch((err) => {
-        alert('Oh noes', err)
-        // Redirect as a fallback
-        window.location.href = `${link.href}.html`
-      })
-
-  }
+				})
+			})
+	}
 
 
-  window.onpopstate = (evt) => {
-    const state = evt.state
-    console.log('popstate::state', state)
-    if (state !== null) loadPartial(`${state}`, 'main', 'main')
-  }
+	window.onpopstate = evt => {
+		let state = evt.state
+		console.log('window.onpopstate::state', state)
+		// load()
+	}
 
 
-};
+}
 
-
-/*
-// let href = `${url.replace(/`${domain}`|.html/g, '')}`
-*/

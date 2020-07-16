@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "develop": "nodemon --watch '*.ts' --exec 'ts-node' index.ts",
+    "develop": "nodemon index.ts",
+    "backup-develop": "nodemon --watch '*.ts' --exec 'ts-node' index.ts",
     "build": "tsc -p .",
     "deploy": "gh-pages -d dist",
     "deploy:build": "npm run build && gh-pages -d dist",
