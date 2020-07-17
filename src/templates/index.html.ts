@@ -14,9 +14,18 @@ export const template = (meta:any, markup:string) => {
 				<link rel="stylesheet" href="/assets/css/style.css">
 			</head>
 			<body data-template="${meta.template}">
+
+				<ul>
+					<li><a href="/">L'Homme</a></li>
+					<li><a href="/experiments">Exp</a></li>
+					<li><a href="/work">Work</a></li>
+					<li><a href="/projects">Projects</a></li>
+				</ul>
+	
 				<main>
 					<section>${markup}</section>
 				</main>
+
 				<script src="/assets/js/index.js"></script>
 			</body>
 		</html>

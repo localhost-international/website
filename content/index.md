@@ -7,11 +7,11 @@ description: localhost % homepage
 ---
 
 
-<ul>
+<!-- <ul>
   <li><a href="/">L'Homme</a></li>
   <li><a href="/experiments">Exp</a></li>
   <li><a href="/work">Work</a></li>
-</ul>
+</ul> -->
 
 <h1>
   localhost&nbsp;

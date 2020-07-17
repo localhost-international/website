@@ -6,11 +6,11 @@ template: default
 description: localhost % projects
 ---
 
-<ul>
+<!-- <ul>
   <li><a href="/">L'Homme</a></li>
   <li><a href="/experiments">Exp</a></li>
   <li><a href="/work">Work</a></li>
-</ul>
+</ul> -->
 
 [Cartographer](/projects/cartographer)
 [Geography](/projects/geography)
