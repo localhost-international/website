@@ -1,13 +1,13 @@
 ### Things to do
 
-- Parse markdown files as navigable pages (no JS)
-- Parse markdown as static HTML pages and JS partials in JSON
-- Use Web History API to traverse pages
-- Load page partial via XHR
-- Don't use JS bundlers
-- Pretty print CSS
-- Copy/package processed website into `/dist` folder for `gh-pages`
-- A11y!!!
+- [x] Parse markdown files as navigable pages (no JS)
+- [] Parse markdown as static HTML pages and JS partials in JSON
+- [x] Use Web History API to traverse pages
+- [x] Load page partial via XHR
+- [x] Don't use JS bundlers for client side code
+- [] Pretty print HTML, CSS and JS
+- [] Copy/package processed website into `/dist` folder for `gh-pages`
+- [] A11y!!!
 
 
 
@@ -15,8 +15,10 @@
 
 - [GitHub Pages 404](https://docs.github.com/en/github/working-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site)
 - [TSDoc](https://github.com/microsoft/tsdoc)
+- [Superstatic](https://github.com/firebase/superstatic/blob/master/examples/server/index.js)
 
-### Nice to have
+
+### MIsc
 
 #### Fonts
 

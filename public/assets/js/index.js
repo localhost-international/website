@@ -1,3 +1,28 @@
+/*
+
+  ___                            ___    __                       __      
+  /\_ \                          /\_ \  /\ \                     /\ \__   
+  \//\ \     ___     ___     __  \//\ \ \ \ \___     ___     ____\ \ ,_\  
+    \ \ \   / __`\  /'___\ /'__`\  \ \ \ \ \  _ `\  / __`\  /',__\\ \ \/  
+    \_\ \_/\ \L\ \/\ \__//\ \L\.\_ \_\ \_\ \ \ \ \/\ \L\ \/\__, `\\ \ \_ 
+    /\____\ \____/\ \____\ \__/.\_\/\____\\ \_\ \_\ \____/\/\____/ \ \__\
+    \/____/\/___/  \/____/\/__/\/_/\/____/ \/_/\/_/\/___/  \/___/   \/__/
+                                                                          
+  localhost %
+
+  Hello again human.
+  The JavaScript used on this website is also human readable.
+
+  Spotted a bug or wanted to ask a question?
+
+  * Visit https://github.com/localhost-international/website/issues
+  * ...or email: leslie@localhost.international
+
+  Happy hacking. 
+
+*/
+
+
 const body = document.body
 const mainContainer = document.querySelector('main')
 
@@ -33,36 +58,18 @@ function render(opts) {
     const partialTemp = document.createElement('div')
     partialTemp.innerHTML = content
     const partial = partialTemp.querySelector(source)
-    console.log('load::fetch::', partial)
     targetContainer.replaceWith(partial)
     history.pushState({ content: partial.innerHTML }, '', url)
   }
   else {
-    // const fadeAnimation = document.querySelector('body')
-    // fadeAnimation.addEventListener('animationend', handleAnimation, true)
-    // function handleAnimation(evt) {
-    //   if (evt.animationName === transition.exit) {
-    //     fadeAnimation.removeEventListener('animationend', handleAnimation, true)
-    //     body.classList.remove(transition.exit)
-    //     // Safe
-    //     const mainContainer = document.querySelector('main')
-    //     mainContainer.innerHTML = content
-    //     // Safe
-    //     body.classList.add(transition.enter)
-    //   }
-    // }
     pageTransition(() => {
       const mainContainer = document.querySelector('main')
       mainContainer.innerHTML = content
     })
   }
-
-  // TODO - Remove hyperlink listener than reapply
   const linkContainer = document.querySelector('main')
-  prepareLinks(linkContainer.querySelectorAll(internalLinksRegex))
-
+  addHyperlinks(linkContainer.querySelectorAll(internalLinksRegex))
 }
-
 
 
 function pageTransition(callback) {
@@ -80,15 +87,17 @@ function pageTransition(callback) {
 }
 
 
-function prepareLinks(anchorLinks) {
-  anchorLinks.forEach((link) => {
-    link.addEventListener('click', (evt) => {
+function addHyperlinks(hyperlinks) {
+  hyperlinks.forEach((link) => {
+    function handleLink(evt) {
       evt.preventDefault()
       pageTransition(() => {
         const url = link.href
         load(url)
       })
-    })
+    }
+    link.removeEventListener('click', handleLink, true)
+    link.addEventListener('click', handleLink, true)
   })  
 }
 
@@ -99,7 +108,7 @@ window.onload = () => {
     '', 
     window.location.toString()
   )
-  prepareLinks(anchorLinks)
+  addHyperlinks(anchorLinks)
 }
 
 

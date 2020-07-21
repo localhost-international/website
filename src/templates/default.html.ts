@@ -1,6 +1,7 @@
 import { html } from '../html'
 import { template as hello } from './partials/hello-header.html'
 
+
 export const template = (meta:any, markup:string) => {
 	return html`
 		<!doctype html>
@@ -16,6 +17,10 @@ export const template = (meta:any, markup:string) => {
 			</head>
 			<body>
 				<main data-template="${meta.template}">
+					<nav>
+						<a href="/" class="">&lt;-</a>
+						<h1>${meta.title}</h1>
+					</nav>
 					<section>${markup}</section>
 				</main>
 				<script src="/assets/js/index.js"></script>

@@ -6,13 +6,10 @@ export default function server(serverConfig:Config) {
 
   const config = serverConfig
 
-  // See: 
-  // - https://github.com/firebase/superstatic/blob/master/examples/server/index.js
-
   const app = superstatic({
-    port: 1337,
+    port: config.server.port,
     config: {
-      public: './dist'
+      public: config.server.root
     }
   })
   

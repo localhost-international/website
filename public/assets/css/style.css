@@ -66,13 +66,19 @@ h1, h2, h3, h4, h5, h6, p, span, a {
   widows: 0;
 }
 
-h1 {
+h1, h1 span {
   color: rgb(0,0,0);
 }
 
 a, a:visited, a:active, a:hover {
   cursor: pointer;
 }
+
+nav a {
+  text-decoration: none;
+  margin: 0 1rem 0 0;
+}
+
 
 .fade-enter-active,
 .fade-leave-active {
@@ -88,4 +94,38 @@ a, a:visited, a:active, a:hover {
 
 .tba {
   cursor: not-allowed;
+}
+
+
+/**
+ * Icons
+ */
+span[data-icon="globe"]::after {
+  content: " 🌐";
+}
+span[data-icon="research"]::after {
+  content: " 📚";
+}
+span[data-icon="development"]::after {
+  content: " 🛠";
+}
+span[data-icon="peace"]::after {
+  content: " ✌️";
+}
+
+
+
+/**
+ * Templates
+ */
+
+main[data-template="index"] {
+
+}
+
+
+
+
+main[data-template="default"] {
+
 }
