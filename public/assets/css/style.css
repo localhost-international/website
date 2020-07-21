@@ -14,7 +14,7 @@ body,
 body.fade-in {
   opacity: 0;
   animation-name: fade-in;
-  animation-duration: 250ms;
+  animation-duration: 300ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
 }
@@ -22,7 +22,7 @@ body.fade-in {
 body.fade-out {
   opacity: 1;
   animation-name: fade-out;
-  animation-duration: 250ms;
+  animation-duration: 300ms;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;  
 }

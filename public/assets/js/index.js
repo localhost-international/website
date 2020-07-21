@@ -2,53 +2,60 @@ const body = document.body
 const mainContainer = document.querySelector('main')
 
 const domainURI = `${window.top.location.host.toString()}`
+
 const internalLinksRegex = `a[href^="${domainURI}"], a[href^="/"]`
+const anchorLinks = document.querySelectorAll(internalLinksRegex)
 
-
-window.onload = () => {
-  history.replaceState(
-    { content: mainContainer.innerHTML }, 
-    '', 
-    window.location.toString()
-  )
+const transition = {
+  exit: 'fade-out',
+  enter: 'fade-in',
 }
 
 
-
-function load(anchorLinkUrl) {
-  fetch(anchorLinkUrl)
+function load(url) {
+  fetch(url)
   .then((resp) => {
-    resp.text().then((text) => {
-      console.log('fetched', text)
-      render({ text, anchorLinkUrl, xhr: true })
+    resp.text().then((content) => {
+      render({ content, url, xhr: true })
     })
   })
 }
 
 
 function render(opts) {
-  const text = opts.text
-  const anchorLinkUrl = opts.anchorLinkUrl
+  const content = opts.content
+  const url = opts.url
   const xhr = opts.xhr
 
   if (xhr) {
     const source = 'main', target = 'main'
     const targetContainer = document.querySelector(target)
     const partialTemp = document.createElement('div')
-    partialTemp.innerHTML = text
+    partialTemp.innerHTML = content
     const partial = partialTemp.querySelector(source)
     console.log('load::fetch::', partial)
     targetContainer.replaceWith(partial)
-    history.pushState({ content: partial.innerHTML }, '',anchorLinkUrl)
-
+    history.pushState({ content: partial.innerHTML }, '', url)
   }
   else {
-    const mainContainer = document.querySelector('main')
-    mainContainer.innerHTML = text
+    // const fadeAnimation = document.querySelector('body')
+    // fadeAnimation.addEventListener('animationend', handleAnimation, true)
+    // function handleAnimation(evt) {
+    //   if (evt.animationName === transition.exit) {
+    //     fadeAnimation.removeEventListener('animationend', handleAnimation, true)
+    //     body.classList.remove(transition.exit)
+    //     // Safe
+    //     const mainContainer = document.querySelector('main')
+    //     mainContainer.innerHTML = content
+    //     // Safe
+    //     body.classList.add(transition.enter)
+    //   }
+    // }
+    pageTransition(() => {
+      const mainContainer = document.querySelector('main')
+      mainContainer.innerHTML = content
+    })
   }
-
-  body.classList.remove('fade-out')
-  body.classList.add('fade-in')
 
   // TODO - Remove hyperlink listener than reapply
   const linkContainer = document.querySelector('main')
@@ -57,27 +64,47 @@ function render(opts) {
 }
 
 
-const anchorLinks = document.querySelectorAll(internalLinksRegex)
+
+function pageTransition(callback) {
+  body.classList.add(transition.exit)
+  const fadeAnimation = document.querySelector('body')
+  fadeAnimation.addEventListener('animationend', handleAnimation, true)
+  function handleAnimation(evt) {
+    if (evt.animationName === transition.exit) {
+      fadeAnimation.removeEventListener('animationend', handleAnimation, true)
+      body.classList.remove(transition.exit)
+      if (callback) callback()
+      body.classList.add(transition.enter)
+    }
+  }
+}
+
 
 function prepareLinks(anchorLinks) {
   anchorLinks.forEach((link) => {
     link.addEventListener('click', (evt) => {
       evt.preventDefault()
-      body.classList.add('fade-out')
-      const anchorLinkUrl = link.href
-      console.log('anchorLinkUrl', anchorLinkUrl)
-      load(anchorLinkUrl)
+      pageTransition(() => {
+        const url = link.href
+        load(url)
+      })
     })
   })  
 }
-prepareLinks(anchorLinks)
 
-  
+
+window.onload = () => {
+  history.replaceState(
+    { content: mainContainer.innerHTML }, 
+    '', 
+    window.location.toString()
+  )
+  prepareLinks(anchorLinks)
+}
+
 
 window.onpopstate = function(evt) {
   body.classList.add('fade-out')
   var state = evt.state
-  if (state) {
-    render({ text: state.content, anchorLinkUrl: null, xhr: false })
-  }
+  if (state) render({ content: state.content, url: null, xhr: false })
 }
