@@ -90,7 +90,7 @@ function pageTransition(callback) {
           console.log('cb::then'); 
           setTimeout(() => {
             body.classList.remove(transition.exit);
-          }, 100); 
+          }, 250); 
         })
         .catch((err) => { console.log('cb::catch err', err); })
       }
