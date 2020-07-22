@@ -81,26 +81,16 @@ function pageTransition(callback) {
     console.log('handleAnimation') //
     if (evt.animationName === transition.exit) {
       fadeAnimation.removeEventListener('animationend', handleAnimation, true)
-      body.classList.remove(transition.exit)
+      // body.classList.remove(transition.exit)
       if (callback) { 
-
-        let cb = () => {
-          return new Promise((resolve, reject) => {
-            callback()
-            //resolve()
-          })
-        }
-
-        cb()
-          .then(() => {
-            console.log('cb::then')
-            // body.classList.add(transition.enter)
-          })
-          .catch((err) => {
-            console.log('cb::catch err', err)
-          })
+        callback()
+        // let cb = () => { return new Promise((resolve, reject) => { callback(); resolve(); }) }
+        // cb()
+        // .then(() => { console.log('cb::then'); body.classList.add(transition.enter) })
+        // .catch((err) => { console.log('cb::catch err', err); })
       }
       // body.classList.add(transition.enter)
+      body.classList.remove(transition.exit)
     }
   }
 }
