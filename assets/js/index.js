@@ -73,15 +73,37 @@ function render(opts) {
 
 
 function pageTransition(callback) {
+  console.log('pageTransition') //
   body.classList.add(transition.exit)
   const fadeAnimation = document.querySelector('body')
   fadeAnimation.addEventListener('animationend', handleAnimation, true)
   function handleAnimation(evt) {
+    console.log('handleAnimation') //
     if (evt.animationName === transition.exit) {
       fadeAnimation.removeEventListener('animationend', handleAnimation, true)
       body.classList.remove(transition.exit)
-      if (callback) callback()
-      body.classList.add(transition.enter)
+      if (callback) { 
+
+        let cb = () => {
+          return new Promise((resolve, reject) => {
+            callback()
+            resolve()
+          })
+        }
+
+        cb()
+          .then(() => {
+            console.log('cb::then')
+            body.classList.add(transition.enter)
+          })
+          .catch((err) => {
+            console.log('cb::catch err', err)
+          })
+        
+
+
+      }
+      // body.classList.add(transition.enter)
     }
   }
 }
