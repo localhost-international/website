@@ -94,14 +94,11 @@ function pageTransition(callback) {
         cb()
           .then(() => {
             console.log('cb::then')
-            body.classList.add(transition.enter)
+            // body.classList.add(transition.enter)
           })
           .catch((err) => {
             console.log('cb::catch err', err)
           })
-        
-
-
       }
       // body.classList.add(transition.enter)
     }
