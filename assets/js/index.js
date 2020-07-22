@@ -86,7 +86,12 @@ function pageTransition(callback) {
         // callback()
         let cb = () => { return new Promise((resolve, reject) => { callback(); resolve(); }) }
         cb()
-        .then(() => { console.log('cb::then'); body.classList.remove(transition.exit); })
+        .then(() => { 
+          console.log('cb::then'); 
+          setTimeout(() => {
+            body.classList.remove(transition.exit);
+          }, 0); 
+        })
         .catch((err) => { console.log('cb::catch err', err); })
       }
       // body.classList.add(transition.enter)
