@@ -51,51 +51,36 @@ function render(opts) {
   const content = opts.content
   const url = opts.url
   const xhr = opts.xhr
-
-  if (xhr) {
-    const source = 'main', target = 'main'
-    const targetContainer = document.querySelector(target)
-    const partialTemp = document.createElement('div')
-    partialTemp.innerHTML = content
-    const partial = partialTemp.querySelector(source)
-    targetContainer.replaceWith(partial)
-    history.pushState({ content: partial.innerHTML }, '', url)
-  }
-  else {
-    pageTransition(() => {
+  pageTransition(() => {
+    if (xhr) {
+      const source = 'main', target = 'main'
+      const targetContainer = document.querySelector(target)
+      const partialTemp = document.createElement('div')
+      partialTemp.innerHTML = content
+      const partial = partialTemp.querySelector(source)
+      targetContainer.replaceWith(partial)
+      history.pushState({ content: partial.innerHTML }, '', url)
+    }
+    else {
       const mainContainer = document.querySelector('main')
       mainContainer.innerHTML = content
-    })
-  }
+    }
+  })
   const linkContainer = document.querySelector('main')
   addHyperlinks(linkContainer.querySelectorAll(internalLinksRegex))
 }
 
 
 function pageTransition(callback) {
-  console.log('pageTransition') //
   body.classList.add(transition.exit)
   const fadeAnimation = document.querySelector('body')
   fadeAnimation.addEventListener('animationend', handleAnimation, true)
   function handleAnimation(evt) {
-    console.log('handleAnimation') //
     if (evt.animationName === transition.exit) {
       fadeAnimation.removeEventListener('animationend', handleAnimation, true)
-      // body.classList.remove(transition.exit)
-      if (callback) { 
-        // callback()
-        let cb = () => { return new Promise((resolve, reject) => { callback(); resolve(); }) }
-        cb()
-        .then(() => { 
-          console.log('cb::then'); 
-          setTimeout(() => {
-            body.classList.remove(transition.exit);
-          }, 250); 
-        })
-        .catch((err) => { console.log('cb::catch err', err); })
-      }
-      // body.classList.add(transition.enter)
-      
+      body.classList.remove(transition.exit)
+      if (callback) callback()
+      body.classList.add(transition.enter)
     }
   }
 }
@@ -105,10 +90,8 @@ function addHyperlinks(hyperlinks) {
   hyperlinks.forEach((link) => {
     function handleLink(evt) {
       evt.preventDefault()
-      pageTransition(() => {
-        const url = link.href
-        load(url)
-      })
+      const url = link.href
+      load(url)
     }
     link.removeEventListener('click', handleLink, true)
     link.addEventListener('click', handleLink, true)
