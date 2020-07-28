@@ -51,22 +51,21 @@ function render(opts) {
   const content = opts.content
   const url = opts.url
   const xhr = opts.xhr
-
-  if (xhr) {
-    const source = 'main', target = 'main'
-    const targetContainer = document.querySelector(target)
-    const partialTemp = document.createElement('div')
-    partialTemp.innerHTML = content
-    const partial = partialTemp.querySelector(source)
-    targetContainer.replaceWith(partial)
-    history.pushState({ content: partial.innerHTML }, '', url)
-  }
-  else {
-    pageTransition(() => {
+  pageTransition(() => {
+    if (xhr) {
+      const source = 'main', target = 'main'
+      const targetContainer = document.querySelector(target)
+      const partialTemp = document.createElement('div')
+      partialTemp.innerHTML = content
+      const partial = partialTemp.querySelector(source)
+      targetContainer.replaceWith(partial)
+      history.pushState({ content: partial.innerHTML }, '', url)
+    }
+    else {
       const mainContainer = document.querySelector('main')
       mainContainer.innerHTML = content
-    })
-  }
+    }
+  })
   const linkContainer = document.querySelector('main')
   addHyperlinks(linkContainer.querySelectorAll(internalLinksRegex))
 }
@@ -91,10 +90,8 @@ function addHyperlinks(hyperlinks) {
   hyperlinks.forEach((link) => {
     function handleLink(evt) {
       evt.preventDefault()
-      pageTransition(() => {
-        const url = link.href
-        load(url)
-      })
+      const url = link.href
+      load(url)
     }
     link.removeEventListener('click', handleLink, true)
     link.addEventListener('click', handleLink, true)
