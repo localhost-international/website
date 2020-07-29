@@ -51,27 +51,6 @@ function render(opts) {
   const content = opts.content
   const url = opts.url
   const xhr = opts.xhr
-  pageTransition(() => {
-    if (xhr) {
-      const source = 'main', target = 'main'
-      const targetContainer = document.querySelector(target)
-      const partialTemp = document.createElement('div')
-      partialTemp.innerHTML = content
-      const partial = partialTemp.querySelector(source)
-      targetContainer.replaceWith(partial)
-      history.pushState({ content: partial.innerHTML }, '', url)
-    }
-    else {
-      const mainContainer = document.querySelector('main')
-      mainContainer.innerHTML = content
-    }
-  })
-  const linkContainer = document.querySelector('main')
-  addHyperlinks(linkContainer.querySelectorAll(internalLinksRegex))
-}
-
-
-function pageTransition(callback) {
   body.classList.add(transition.exit)
   const fadeAnimation = document.querySelector('body')
   fadeAnimation.addEventListener('animationend', handleAnimation, true)
@@ -79,7 +58,22 @@ function pageTransition(callback) {
     if (evt.animationName === transition.exit) {
       fadeAnimation.removeEventListener('animationend', handleAnimation, true)
       body.classList.remove(transition.exit)
-      if (callback) callback()
+      if (xhr) {
+        const source = 'main', target = 'main'
+        const targetContainer = document.querySelector(target)
+        const partialTemp = document.createElement('div')
+        partialTemp.innerHTML = content
+        const partial = partialTemp.querySelector(source)
+        targetContainer.replaceWith(partial)
+        history.pushState({ content: partial.innerHTML }, '', url)
+      }
+      else {
+        const mainContainer = document.querySelector('main')
+        mainContainer.innerHTML = content  
+        body.classList.add(transition.enter)
+      }
+      const linkContainer = document.querySelector('main')
+      addHyperlinks(linkContainer.querySelectorAll(internalLinksRegex))
       body.classList.add(transition.enter)
     }
   }
