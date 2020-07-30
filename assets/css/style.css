@@ -10,6 +10,7 @@
   font-weight: 200 800;
 }
 
+
 body,
 body.fade-in {
   opacity: 0;
@@ -95,7 +96,6 @@ nav a {
 .tba {
   cursor: not-allowed;
 }
-
 
 /**
  * Icons
