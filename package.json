@@ -5,6 +5,7 @@
   "scripts": {
     "develop": "nodemon index.ts",
     "backup-develop": "nodemon --watch '*.ts' --exec 'ts-node' index.ts",
+    "build:new": "nodemon --watch '*.ts' --exec 'ts-node' index.ts",
     "build": "tsc -p .",
     "deploy": "gh-pages -d dist",
     "deploy:build": "npm run build && gh-pages -d dist",
