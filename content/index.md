@@ -12,7 +12,7 @@ description: localhost % homepage
 </h1>
 
 <h3>
-  is a boutique <span data-icon="research">research</span> and <span data-icon="development">development</span> studio based in London, that builds applications and experiences.
+  is a <span data-icon="research">research</span> and <span data-icon="development">development</span> studio that builds applications and experiences.
 </h3>
 <h3>
   Currently crafting <a href="/experiments">experiments</a> and decentralised web <a href="/projects">projects</a>.
