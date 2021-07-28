@@ -58,8 +58,8 @@ h1, h2, h3, h4, h5, h6, p, span, a {
   font-family: "Manrope", sans-serif;
   color: rgb(90,90,90);
   font-weight: 450;
-  line-height: max(96px, 5.2vw);
-  font-size: max(72px, 4.2vw);
+  line-height: max(90px, 4.8vw);
+  font-size: max(66px, 3.8vw);
   display: inline-block;
   padding: 0;
   margin: 0; 
@@ -94,22 +94,26 @@ nav a {
 }
 
 .tba {
-  cursor: not-allowed;
+  cursor: not-allowed !important;
+}
+.no {
+  opacity: .75 !important;
+  text-decoration: line-through !important;
 }
 
 /**
  * Icons
  */
-span[data-icon="globe"]::after {
+[data-icon="globe"]::after {
   content: " 🌐";
 }
-span[data-icon="research"]::after {
+[data-icon="research"]::after {
   content: " 📚";
 }
-span[data-icon="development"]::after {
+[data-icon="development"]::after {
   content: " 🛠";
 }
-span[data-icon="peace"]::after {
+[data-icon="peace"]::after {
   content: " ✌️";
 }
 

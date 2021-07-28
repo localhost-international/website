@@ -7,6 +7,5 @@ description: localhost % projects
 ---
 
 
-<!-- <a href="/projects/cartographer">Cartographer</a>   -->
 <a href="https://github.com/localhost-international/cartographer/">Cartographer</a>  
-<!-- <a href="/projects/geography" class="tba">Geography</a> -->
+<a href="/project-402" class="no" title="...nothing to see here...">402</a>
