@@ -12,7 +12,11 @@ var __assign = (this && this.__assign) || function () {
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -42,10 +46,10 @@ function parse(files) {
     var pages = [];
     return new Promise(function (resolve, reject) {
         files.map(function (file) {
-            var filePath = config.paths.content + "/" + file;
+            var filePath = "".concat(config.paths.content, "/").concat(file);
             var fileData = fs_extra_1.default.readFileSync(filePath);
-            var fileMeta = gray_matter_1.default(fileData).data;
-            var renderedHtml = sanitize_1.default(marked_1.default(gray_matter_1.default(fileData).content));
+            var fileMeta = (0, gray_matter_1.default)(fileData).data;
+            var renderedHtml = (0, sanitize_1.default)((0, marked_1.default)((0, gray_matter_1.default)(fileData).content));
             pages.push({
                 path: filePath,
                 markup: renderedHtml,

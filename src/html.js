@@ -8,8 +8,8 @@ var html = function (strings) {
     }
     var template = '';
     strings.map(function (string, idx) {
-        var value = typeof values[idx] === 'string' ? "" + values[idx] : '';
-        template += "" + string + value;
+        var value = typeof values[idx] === 'string' ? "".concat(values[idx]) : '';
+        template += "".concat(string).concat(value);
     }).join('');
     return template;
 };

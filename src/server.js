@@ -10,7 +10,7 @@ function server(serverConfig) {
         }
     });
     var ws = app.listen(function () {
-        console.log("server::running http://127.0.0.1:" + config.server.port + "/");
+        console.log("server::running http://127.0.0.1:".concat(config.server.port, "/"));
     });
 }
 exports.default = server;

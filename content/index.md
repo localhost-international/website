@@ -8,7 +8,7 @@ description: localhost % homepage
 
 <h1>
   <span data-icon="globe" title="Leslie Owusu-Appiah's homepage">localhost</span>&nbsp;
-</h1>
+</h1><br />
 <h3>
   See <a href="/projects">projects</a> for a mobile web browser.
 </h3>

@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -29,7 +33,7 @@ var templates = __importStar(require("./templates"));
 function store(page) {
     fs_extra_1.default.copySync('public', 'dist');
     return new Promise(function (resolve, reject) {
-        var fileDist = config.paths.dist + "/" + page.meta.slug + ".html";
+        var fileDist = "".concat(config.paths.dist, "/").concat(page.meta.slug, ".html");
         var fileSanitized = page.markup;
         var fileMeta = page.meta;
         var template = page.meta.template === 'index' ?

@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -34,11 +38,11 @@ var pages = {
 function compile() {
     readdir(config.paths.content).then(function (files) {
         files = files.filter(function (file) { return file.match(/(\.md)|(\.markdown)/g); });
-        parse_1.default(files)
+        (0, parse_1.default)(files)
             .then(function (files) {
             pages.markdown = files;
             pages.markdown.forEach(function (page) {
-                store_1.default(page)
+                (0, store_1.default)(page)
                     .then(function (file) {
                     console.log('store::then - Successful', file.fileDist);
                 })

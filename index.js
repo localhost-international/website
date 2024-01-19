@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -26,6 +30,6 @@ var config = __importStar(require("./config.json"));
 var compile_1 = __importDefault(require("./src/compile"));
 var server_1 = __importDefault(require("./src/server"));
 // Compile list of files
-compile_1.default();
+(0, compile_1.default)();
 // Run dev server
-server_1.default(config);
+(0, server_1.default)(config);
